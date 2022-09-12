@@ -12,14 +12,14 @@
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{asset('/')}}admin/assets/images/favicon.ico">
-
     <!-- DataTables -->
-    <link href="{{asset('/')}}assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('/')}}assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}admin/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
     <!-- Responsive datatable examples -->
-    <link href="{{asset('/')}}assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-
+    <link href="{{asset('/')}}admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <!-- Summernote css -->
+    <link href="{{asset('/')}}admin/assets/libs/summernote/summernote-bs4.min.css" rel="stylesheet" type="text/css" />
     <!-- Bootstrap Css -->
     <link href="{{asset('/')}}admin/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Icons Css -->
@@ -73,7 +73,7 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="rounded-circle header-profile-user" src="{{asset('/')}}admin/assets/images/users/avatar-1.jpg"
                              alt="Header Avatar">
-                        <span class="d-none d-xl-inline-block ml-1">Henry</span>
+                        <span class="d-none d-xl-inline-block ml-1">{{ Session::get('teacher_name') }}</span>
                         <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -83,17 +83,12 @@
                         <a class="dropdown-item d-block" href="#"><span class="badge badge-success float-right">11</span><i class="bx bx-wrench font-size-16 align-middle mr-1"></i> Settings</a>
                         <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle mr-1"></i> Lock screen</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
-                        <form action="{{route('logout')}}" method="POST" id="logoutForm">
+                        <a class="dropdown-item text-danger" href="#" onclick="event.preventDefault(); document.getElementById('teacherlogoutForm').submit();"><i class="bx bx-power-off font-size-16 align-middle mr-1 text-danger"></i> Logout</a>
+                        <form action="{{route('teacher.logout')}}" method="post" id="teacherlogoutForm">
                             @csrf
                         </form>
                     </div>
                 </div>
-
-
-
-
-
             </div>
         </div>
     </header> <!-- ========== Left Sidebar Start ========== -->
@@ -108,7 +103,7 @@
                     <li class="menu-title">Menu</li>
 
                     <li>
-                        <a href="{{route('dashboard')}}" class="waves-effect">
+                        <a href="{{route('teacher.dashboard')}}" class="waves-effect">
                             <i class="bx bx-home-circle"></i>
                             <span>Dashboards</span>
                         </a>
@@ -118,11 +113,12 @@
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-layout"></i>
-                            <span>Teacher Module</span>
+                            <span>Course Module</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="{{route('teacher.add')}}">Add Teacher</a></li>
-                            <li><a href="{{route('teacher.manage')}}">Manage Teacher</a></li>
+                            <li><a href="{{route('course.add')}}">Add Course</a></li>
+                            <li><a href="{{route('course.manage')}}">Manage Course</a></li>
+                            {{--                            <li><a href="layouts-light-sidebar.html">Manage Teacher</a></li>--}}
                         </ul>
                     </li>
 
@@ -131,10 +127,10 @@
                     <li>
                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                             <i class="bx bx-store"></i>
-                            <span>Course Module</span>
+                            <span>Enroll Module</span>
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="ecommerce-products.html">Manage Course</a></li>
+                            <li><a href="ecommerce-products.html">Manage Enroll</a></li>
                         </ul>
                     </li>
 
@@ -145,44 +141,6 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="false">
                             <li><a href="crypto-wallet.html">Manage Student</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-envelope"></i>
-                            <span>Email</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="email-inbox.html">Inbox</a></li>
-                            <li><a href="email-read.html">Read Email</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-receipt"></i>
-                            <span>User Module</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href="invoices-list.html">Add User</a></li>
-                            <li><a href="invoices-detail.html">Manage User</a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                            <i class="bx bx-share-alt"></i>
-                            <span>Multi Level</span>
-                        </a>
-                        <ul class="sub-menu" aria-expanded="true">
-                            <li><a href="javascript: void(0);">Level 1.1</a></li>
-                            <li><a href="javascript: void(0);" class="has-arrow">Level 1.2</a>
-                                <ul class="sub-menu" aria-expanded="true">
-                                    <li><a href="javascript: void(0);">Level 2.1</a></li>
-                                    <li><a href="javascript: void(0);">Level 2.2</a></li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
 
@@ -374,31 +332,35 @@
 <script src="{{asset('/')}}admin/assets/libs/apexcharts/apexcharts.min.js"></script>
 
 <script src="{{asset('/')}}admin/assets/js/pages/dashboard.init.js"></script>
+<!-- Summernote js -->
+<script src="{{asset('/')}}admin/assets/libs/summernote/summernote-bs4.min.js"></script>
 
+<!-- init js -->
+<script src="{{asset('/')}}admin/assets/js/pages/form-editor.init.js"></script>
+<!-- App js -->
 <!-- Required datatable js -->
-<script src="{{asset('/')}}assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="{{asset('/')}}assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 <!-- Buttons examples -->
-<script src="{{asset('/')}}assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
-<script src="{{asset('/')}}assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
-<script src="{{asset('/')}}assets/libs/jszip/jszip.min.js"></script>
-<script src="{{asset('/')}}assets/libs/pdfmake/build/pdfmake.min.js"></script>
-<script src="{{asset('/')}}assets/libs/pdfmake/build/vfs_fonts.js"></script>
-<script src="{{asset('/')}}assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<script src="{{asset('/')}}assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
-<script src="{{asset('/')}}assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/jszip/jszip.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/pdfmake/build/pdfmake.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/pdfmake/build/vfs_fonts.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-buttons/js/buttons.html5.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-buttons/js/buttons.print.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js"></script>
 
 <!-- Responsive examples -->
-<script src="{{asset('/')}}assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<script src="{{asset('/')}}assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="{{asset('/')}}admin/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
 <!-- Datatable init js -->
-<script src="{{asset('/')}}assets/js/pages/datatables.init.js"></script>
-
-<!-- App js -->
+<script src="{{asset('/')}}admin/assets/js/pages/datatables.init.js"></script>
 <script src="{{asset('/')}}admin/assets/js/app.js"></script>
 </body>
 
 
 <!-- Mirrored from themesbrand.com/skote/layouts/vertical/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 08 Sep 2020 15:07:20 GMT -->
 </html>
+

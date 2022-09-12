@@ -3,9 +3,47 @@
 @section('body')
 
     <div class="row">
-        <div class="col">
-            <h1>This is manage teacher page.</h1>
-        </div>
-    </div>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <h4 class="card-title">All Teacher Info</h4>
+                    <p class="card-title-desc">{{Session::get('message')}}</p>
+
+                    <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                        <thead>
+                        <tr>
+                            <th>SI NO</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        @foreach($teachers as $teacher)
+                        <tr>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$teacher->name}}</td>
+                            <td>{{$teacher->email}}</td>
+                            <td>{{$teacher->mobile}}</td>
+                            <td>
+                                <img src="{{asset($teacher->image)}}" alt="" width="60" height="80">
+                            </td>
+                            <td>
+                                <a href="{{route('teacher.edit', ['id' => $teacher->id])}}" class="btn btn-success btn-sm"><i class="fa-edit"></i></a>
+                                <a href="{{route('teacher.delete', ['id' => $teacher->id])}}" class="btn btn-danger btn-sm"><i class="fa-trash"></i></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
 
 @endsection
