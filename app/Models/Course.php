@@ -17,7 +17,7 @@ class Course extends Model
         self::$image = $request->file('image');
         self::$extension = self::$image->getClientOriginalExtension();
         self::$imageName = 'ssmsb7_'.time().'.'.self::$extension;
-        self::$directory = 'upload/course-images';
+        self::$directory = 'upload/course-images/';
         self::$image->move(self::$directory, self::$imageName);
         return self::$directory.self::$imageName;
     }
