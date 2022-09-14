@@ -7,6 +7,7 @@ use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\TeacherDashboardController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\AdminCourseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,7 @@ Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course
 Route::post('/course/update/{id}', [CourseController::class, 'update'])->name('course.update');
 Route::get('/course/delete/{id}', [CourseController::class, 'delete'])->name('course.delete');
 
+
 Route::post('/course/create', [CourseController::class, 'create'])->name('course.create');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
@@ -55,5 +57,15 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::get('/teacher/edit/{id}', [TeacherController::class, 'edit'])->name('teacher.edit');
     Route::post('/teacher/update/{id}', [TeacherController::class, 'update'])->name('teacher.update');
     Route::get('/teacher/delete/{id}', [TeacherController::class, 'delete'])->name('teacher.delete');
+
+
+    Route::get('/admin/manage-course', [AdminCourseController::class, 'manageCourse'])->name('admin.manage-course');
+    Route::get('/admin/course-detail/{id}', [AdminCourseController::class, 'CourseDetail'])->name('admin.course-detail');
+    Route::get('/admin/update-course-status/{id}', [AdminCourseController::class, 'updateStatus'])->name('admin.update-course-status');
+
+    Route::get('/admin/manage-course-offer', [AdminCourseController::class, 'manageOffer'])->name('admin.manage-course-offer');
+    Route::post('/admin/create-course-offer', [AdminCourseController::class, 'createOffer'])->name('admin.create-course-offer');
+
+    Route::get('/admin/edit-course-offer/{id}', [AdminCourseController::class, 'editOffer'])->name('admin.course-offer-edit');
 
 });
