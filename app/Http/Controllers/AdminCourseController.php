@@ -52,4 +52,10 @@ class AdminCourseController extends Controller
            'single_course' => $this->course,
         ]);
     }
+
+    public function updateOffer(Request $request)
+    {
+        Course::updateOffer($request);
+        return redirect('admin/manage-course-offer')->with('message', 'Course offer updated successfully.');
+    }
 }

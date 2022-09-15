@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <h4 class="card-title mb-4">Add Course Offer Form</h4>
                     <h4 class="text-center text-success">{{Session::get('message')}}</h4>
-                    <form action="{{route('admin.create-course-offer')}}" method="POST" enctype="multipart/form-data">
+                    <form action="{{route('admin.update-course-offer')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row mb-4">
                             <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Course Name</label>
@@ -26,7 +26,7 @@
                             <label for="horizontal-email-input" class="col-sm-3 col-form-label">Banner Image</label>
                             <div class="col-sm-9">
                                 <input type="file" value="" class="form-control-file" name="image">
-                                <img src="{{asset($single_course->image)}}" alt="" height="120" width="100"/>
+                                <img src="{{asset($single_course->banner_image)}}" alt="" height="120" width="100"/>
                             </div>
                         </div>
                         <div class="form-group row mb-4">
@@ -38,7 +38,7 @@
                         <div class="form-group row justify-content-end">
                             <div class="col-sm-9">
                                 <div>
-                                    <button type="submit" class="btn btn-primary w-md">Create New Course Offer</button>
+                                    <button type="submit" class="btn btn-primary w-md">Update Course Offer</button>
                                 </div>
                             </div>
                         </div>

@@ -7,35 +7,22 @@
 @section('body')
     <div id="slider" class="carousel slide" data-bs-ride="carousel" data-bs-interval="1800">
         <ol class="carousel-indicators">
-            <li data-bs-target="#slider" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#slider" data-bs-slide-to="1" class=""></li>
-            <li data-bs-target="#slider" data-bs-slide-to="2" class=""></li>
+            @foreach($offer_courses as $key => $offer_course)
+            <li data-bs-target="#slider" data-bs-slide-to="{{$key}}" class="{{$key == 0 ? 'active' : ''}}"></li>
+            @endforeach
         </ol>
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="{{asset('/website/img/img_3.jpg')}}" alt="" class="w-100"/>
-                <div class="carousel-caption">
-                    <h1>PHP with Laravel Framework</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda consequuntur earum facilis illo libero quae tempora? Debitis dolore doloremque eveniet, id illo iste laudantium minus neque nihil perferendis repellat sint.</p>
-                    <a href="" class="btn btn-success px-5">Read More</a>
+            @foreach($offer_courses as $key1 => $offer_course)
+            <div class="carousel-item {{$key1 == 0 ? 'active' : ''}}">
+                <img src="{{asset(asset($offer_course->banner_image))}}" alt="" class="w-100"/>
+                <div class="carousel-caption my-caption">
+                    <h1>{{$offer_course->title}}</h1>
+                    <p>Actual Course Fee: {{$offer_course->fee}}</p>
+                    <p>Offer Fee: {{$offer_course->offer_fee}}</p>
+                    <a href="{{route('course-detail', ['id' => $offer_course->id])}}" class="btn btn-success px-5">Read More</a>
                 </div>
             </div>
-            <div class="carousel-item">
-                <img src="{{asset('/website/img/img_4.jpg')}}" alt="" class="w-100"/>
-                <div class="carousel-caption">
-                    <h1>Responsive & Friendly Web Design</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda consequuntur earum facilis illo libero quae tempora? Debitis dolore doloremque eveniet, id illo iste laudantium minus neque nihil perferendis repellat sint.</p>
-                    <a href="" class="btn btn-success px-5">Read More</a>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="{{asset('/website/img/img_1.jpg')}}" alt="" class="w-100"/>
-                <div class="carousel-caption">
-                    <h1>Android App Development</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda consequuntur earum facilis illo libero quae tempora? Debitis dolore doloremque eveniet, id illo iste laudantium minus neque nihil perferendis repellat sint.</p>
-                    <a href="" class="btn btn-success px-5">Read More</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 
@@ -49,42 +36,21 @@
         </div>
         <div class="container py-5">
             <div class="row">
+                @foreach($courses as $course)
                 <div class="col-md-4 mb-3">
                     <div class="card">
-                        <img src="{{asset('/website/img/offer-bg.jpg')}}" alt="" class="card-img-top">
+                        <img src="{{asset($course->image)}}" alt="" class="card-img-top">
                         <div class="card-body">
-                            <h3>Responsive Web Design</h3>
-                            <h5>Md. Abdul Karim</h5>
-                            <p>Starting Date: 12.09.2022</p>
+                            <h3>{{$course->title}}</h3>
+                            <h5>{{$course->teacher->name}}</h5>
+                            <h5>Tk. {{$course->fee}}</h5>
+                            <p>Starting Date: {{$course->starting_date}}</p>
                             <hr>
-                            <a href="" class="btn btn-outline-success px-5">Read More</a>
+                            <a href="{{route('course-detail', ['id' => $course->id])}}" class="btn btn-outline-success px-5">Read More</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img src="{{asset('/website/img/offer-bg.jpg')}}" alt="" class="card-img-top">
-                        <div class="card-body">
-                            <h3>Responsive Web Design</h3>
-                            <h5>Md. Abdul Karim</h5>
-                            <p>Starting Date: 12.09.2022</p>
-                            <hr>
-                            <a href="" class="btn btn-outline-success px-5">Read More</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <img src="{{asset('/website/img/offer-bg.jpg')}}" alt="" class="card-img-top">
-                        <div class="card-body">
-                            <h3>Responsive Web Design</h3>
-                            <h5>Md. Abdul Karim</h5>
-                            <p>Starting Date: 12.09.2022</p>
-                            <hr>
-                            <a href="" class="btn btn-outline-success px-5">Read More</a>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
         </div>

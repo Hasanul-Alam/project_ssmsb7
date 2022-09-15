@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="{{asset('/website/css/bootstrap.css')}}">
     <link rel="stylesheet" href="{{asset('/website/css/all.css')}}">
     <link rel="stylesheet" href="{{asset('/website/css/style.css')}}">
+    <style>
+        .my-caption
+        {
+            background: rgba(0, 0, 0, 0.5);
+        }
+    </style>
 </head>
 <body>
 

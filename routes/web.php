@@ -8,6 +8,7 @@ use App\Http\Controllers\TeacherAuthController;
 use App\Http\Controllers\TeacherDashboardController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AdminCourseController;
+use App\Http\Controllers\EnrollController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,7 +17,7 @@ use App\Http\Controllers\AdminCourseController;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
-|
+
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -24,7 +25,10 @@ Route::get('/about-us', [HomeController::class, 'about'])->name('about');
 Route::get('/all-courses', [HomeController::class, 'courses'])->name('courses');
 Route::get('/contact-us', [HomeController::class, 'contact'])->name('contact');
 Route::get('/login-registration', [HomeController::class, 'auth'])->name('login-registration');
-Route::get('/course-details', [HomeController::class, 'detail'])->name('course-detail');
+Route::get('/course-details/{id}', [HomeController::class, 'detail'])->name('course-detail');
+
+Route::get('/enroll-now/{id}', [EnrollController::class, 'index'])->name('enroll-now');
+Route::post('/new-enroll/{id}', [EnrollController::class, 'enroll'])->name('enroll.new');
 
 Route::get('/teacher/login', [TeacherAuthController::class, 'login'])->name('teacher.login');
 Route::post('/teacher/login', [TeacherAuthController::class, 'loginCheck'])->name('teacher.login');
@@ -67,5 +71,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified']
     Route::post('/admin/create-course-offer', [AdminCourseController::class, 'createOffer'])->name('admin.create-course-offer');
 
     Route::get('/admin/edit-course-offer/{id}', [AdminCourseController::class, 'editOffer'])->name('admin.course-offer-edit');
+
+    Route::post('/admin/update-course-offer', [AdminCourseController::class, 'updateOffer'])->name('admin.update-course-offer');
 
 });

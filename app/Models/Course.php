@@ -64,4 +64,24 @@ class Course extends Model
         self::$course->save();
         return self::$message;
     }
+
+    public static function updateOffer($request)
+    {
+        self::$course = Course::find($request->course_id);
+        if($request->file('image'))
+        {
+            if(file_exists(self::$course->banner_image))
+            {
+                unlink(self::$course->banner_image);
+            }
+            self::$imageUrl = self::getImageUrl($request, 'upload/course-offer-images/');
+        }
+        else {
+            self::$imageUrl = self::$course->banner_image;
+        }
+
+        self::$course->offer_fee = $request->offer_fee;
+        self::$course->banner_image = self::$imageUrl;
+        self::$course->save();
+    }
 }
